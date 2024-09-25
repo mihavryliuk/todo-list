@@ -1,12 +1,14 @@
-{% block title %}{{ form.instance.pk|yesno:"Edit task,Add task" }}{% endblock %}
-
 {% block content %}
-<h1>{{ form.instance.pk|yesno:"Edit task,Add task" }}</h1>
+    <div class="container">
+        <h1 class="my-4">{{ form.instance.pk|yesno:"Edit task,Add task" }}</h1> <!-- Заголовок -->
 
-<form method="post">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit" class="btn btn-primary">{{ form.instance.pk|yesno:"Update,Add" }} task</button>
-    <a href="{% url 'todo:task-list' %}" class="btn btn-secondary">Cancel</a>
-</form>
+        <form method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit" class="btn btn-primary">
+                {% if form.instance.pk %}Update{% else %}Add{% endif %} task
+            </button>
+            <a href="{% url 'todo:task-list' %}" class="btn btn-secondary">Cancel</a>
+        </form>
+    </div>
 {% endblock %}
