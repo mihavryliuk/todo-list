@@ -6,6 +6,7 @@ class TaskForm(forms.ModelForm):
         model = Task
         fields = ["content", "deadline", "is_done", "tags"]
         widgets = {
+            "deadline": forms.DateTimeInput(attrs={"type": "datetime-local"}),
             'tags': forms.CheckboxSelectMultiple(),
         }
 
