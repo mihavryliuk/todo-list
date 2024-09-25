@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+
+{% block title %}Tag List{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-md-3">
+        <h3>Sidebar</h3>
+        <ul class="list-group">
+            <li class="list-group-item"><a href="{% url 'todo:task-list' %}">Home</a></li>
+            <li class="list-group-item"><a href="{% url 'todo:tag-list' %}">Tags</a></li>
+        </ul>
+    </div>
+    <div class="col-md-9">
+        <h1>Tags</h1>
+        <a href="{% url 'todo:tag-add' %}" class="btn btn-primary mb-3">Add Tag</a>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for tag in tags %}
+                    <tr>
+                        <td>{{ tag.name }}</td>
+                        <td>
+                            <a href="{% url 'todo:tag-update' tag.pk %}" class="btn btn-secondary">Edit</a>
+                            <a href="{% url 'todo:tag-delete' tag.pk %}" class="btn btn-danger">Delete</a> 
+                        </td>
+                    </tr>
+                {% empty %}
+                    <tr>
+                        <td colspan="2">No tags available.</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}
+
